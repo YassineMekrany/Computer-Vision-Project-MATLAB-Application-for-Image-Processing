@@ -1,0 +1,3875 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Fenetre</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-12-19"><meta name="DC.source" content="Fenetre.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="keyword">function</span> varargout = Fenetre(varargin)
+gui_Singleton = 1;
+gui_State = struct(<span class="string">'gui_Name'</span>,       mfilename, <span class="keyword">...</span>
+                   <span class="string">'gui_Singleton'</span>,  gui_Singleton, <span class="keyword">...</span>
+                   <span class="string">'gui_OpeningFcn'</span>, @Fenetre_OpeningFcn, <span class="keyword">...</span>
+                   <span class="string">'gui_OutputFcn'</span>,  @Fenetre_OutputFcn, <span class="keyword">...</span>
+                   <span class="string">'gui_LayoutFcn'</span>,  [] , <span class="keyword">...</span>
+                   <span class="string">'gui_Callback'</span>,   []);
+<span class="keyword">if</span> nargin &amp;&amp; ischar(varargin{1})
+    gui_State.gui_Callback = str2func(varargin{1});
+<span class="keyword">end</span>
+
+<span class="keyword">if</span> nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+<span class="keyword">else</span>
+    gui_mainfcn(gui_State, varargin{:});
+<span class="keyword">end</span>
+
+
+<span class="comment">% --- Executes just before Fenetre is made visible.</span>
+<span class="keyword">function</span> Fenetre_OpeningFcn(hObject, eventdata, handles, varargin)
+handles.output = hObject;
+guidata(hObject, handles);
+ah = axes(<span class="string">'unit'</span>, <span class="string">'normalized'</span>, <span class="string">'position'</span>, [0 0 1 1]);
+bg = imread(<span class="string">'background.jpg'</span>); imagesc(bg);
+set(ah,<span class="string">'handlevisibility'</span>,<span class="string">'off'</span>,<span class="string">'visible'</span>,<span class="string">'off'</span>)
+uistack(ah, <span class="string">'bottom'</span>);
+<span class="keyword">global</span> check;
+check=0;
+
+<span class="keyword">function</span> varargout = Fenetre_OutputFcn(hObject, eventdata, handles)
+varargout{1} = handles.output;
+
+<span class="keyword">function</span> checkbox1_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> check;
+a=get(handles.checkbox1,<span class="string">'Value'</span>);
+<span class="keyword">if</span> (a==1)
+ check=1;
+<span class="keyword">end</span>
+<span class="keyword">if</span> (a==0)
+ check=0;
+<span class="keyword">end</span>
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_Fichier_Callback(hObject, eventdata, handles)
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_Apropos_Callback(hObject, eventdata, handles)
+AproposFig=figure(<span class="string">'Name'</span>,<span class="string">'&Agrave;-propos'</span>, <span class="keyword">...</span>
+   <span class="string">'NumberTitle'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+   <span class="string">'tag'</span>, <span class="string">'A propos'</span>, <span class="keyword">...</span>
+   <span class="string">'BusyAction'</span>,<span class="string">'Queue'</span>,<span class="string">'Interruptible'</span>,<span class="string">'off'</span>, <span class="keyword">...</span>
+<span class="comment">%    'Color', [162 244 199]/256,...</span>
+   <span class="string">'position'</span>,[400 300 300 220],<span class="keyword">...</span>
+   <span class="string">'IntegerHandle'</span>, <span class="string">'off'</span>, <span class="keyword">...</span>
+   <span class="string">'WindowStyle'</span>,<span class="string">'modal'</span>,<span class="keyword">...</span>
+   <span class="string">'Colormap'</span>, gray(256));
+
+Std.Interruptible = <span class="string">'off'</span>;
+Std.BusyAction = <span class="string">'queue'</span>;
+Ctl = Std;
+Ctl.Units = <span class="string">'Pixels'</span>;
+Ctl.Parent = AproposFig;
+
+texte=Ctl;
+texte.Interruptible=<span class="string">'off'</span>;
+texte.Style=<span class="string">'text'</span>;
+texte.Horiz=<span class="string">'left'</span>;
+texte.Background=[162 244 199]/256;
+texte.Foreground=<span class="string">'blue'</span>;
+texte.FontWeight=<span class="string">'bold'</span>;
+texte.Fontsize=12;
+
+<span class="comment">% %%/******* text label A Propos **************/</span>
+chaine1=<span class="string">'Ce projet a &eacute;t&eacute; r&eacute;alis&eacute; par :'</span>;
+hs.hTexteApropos=uicontrol(texte,<span class="keyword">...</span>
+   <span class="string">'Foreground'</span>,<span class="string">'black'</span>,<span class="keyword">...</span>
+   <span class="string">'Position'</span>,[20 110 220 100], <span class="keyword">...</span>
+   <span class="string">'String'</span>,chaine1);
+
+chaine2=<span class="string">'Nabil Elhanchoud'</span>;
+hs.hTexteApropos=uicontrol(texte,<span class="keyword">...</span>
+   <span class="string">'Position'</span>,[60 85 180 100], <span class="keyword">...</span>
+   <span class="string">'String'</span>,chaine2);
+
+chaine3=<span class="string">'Encadr&eacute; Par : '</span>;
+hs.hTexteApropos=uicontrol(texte,<span class="keyword">...</span>
+   <span class="string">'Foreground'</span>,<span class="string">'black'</span>,<span class="keyword">...</span>
+   <span class="string">'Position'</span>,[20 45 140 100], <span class="keyword">...</span>
+   <span class="string">'String'</span>,chaine3);
+
+chaine3=<span class="string">'M.Hamid Tahiri'</span>;
+hs.hTexteApropos=uicontrol(texte,<span class="keyword">...</span>
+   <span class="string">'Position'</span>,[60 20 140 100], <span class="keyword">...</span>
+   <span class="string">'String'</span>,chaine3);
+
+chaine6=<span class="string">'Master MIDVI - 20017/20019'</span>;
+hs.hTexteApropos=uicontrol(texte,<span class="keyword">...</span>
+   <span class="string">'Foreground'</span>,<span class="string">'black'</span>,<span class="keyword">...</span>
+   <span class="string">'Position'</span>,[50 -30 260 100], <span class="keyword">...</span>
+   <span class="string">'String'</span>,chaine6);
+
+<span class="comment">%==============================================================</span>
+<span class="comment">%/*** le bouton ok</span>
+h.hBtnOk=uicontrol( <span class="keyword">...</span>
+   <span class="string">'Parent'</span>,AproposFig, <span class="keyword">...</span>
+   <span class="string">'BusyAction'</span>,<span class="string">'Queue'</span>,<span class="string">'Interruptible'</span>,<span class="string">'off'</span>,<span class="keyword">...</span>
+   <span class="string">'Style'</span>,<span class="string">'pushbutton'</span>, <span class="keyword">...</span>
+   <span class="string">'Units'</span>,<span class="string">'pixels'</span>, <span class="keyword">...</span>
+   <span class="string">'Position'</span>,[100 10 100 25], <span class="keyword">...</span>
+   <span class="string">'String'</span>,<span class="string">'Ok'</span>, <span class="keyword">...</span>
+   <span class="string">'Callback'</span>,<span class="string">'close(gcf)'</span>);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Ouvrir_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+[file,path] = uigetfile(<span class="string">'*.*'</span>);
+imageO = imread(sprintf(<span class="string">'%s'</span>,path,file));
+axes(handles.imgO)
+imshow(imageO);
+axes(handles.imgS)
+imageS=zeros();
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Enregister_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS
+[file,path] = uiputfile(<span class="string">'*.png'</span>,<span class="string">'Enregistre'</span>);
+imwrite(imageS, sprintf(<span class="string">'%s'</span>,path,file),<span class="string">'png'</span>);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Quitter_Callback(hObject, eventdata, handles)
+delete(handles.figure1)
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_Transformation_Callback(hObject, eventdata, handles)
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Binarisation_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+[l,c,d]=size(image);
+v=zeros(l,c);
+seuil=128;
+<span class="keyword">if</span> d==3
+    image=rgb2gray(image);
+<span class="keyword">end</span>
+image = double(image);
+<span class="keyword">for</span> i=1:l
+   <span class="keyword">for</span> j=1:c
+       <span class="keyword">if</span> image(i,j)&lt;seuil
+           v(i,j)=0;
+       <span class="keyword">else</span>
+           v(i,j)=255;
+       <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_BinarisationS_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+[l,c,d]=size(image);
+v=zeros(l,c);
+<span class="keyword">if</span> d==3
+    image=rgb2gray(image);
+<span class="keyword">end</span>
+<span class="comment">% Calcule du seuil</span>
+m0=1;
+m1=mean2(image);
+m2=mean2(image.^2);
+m3=mean2(image.^3);
+<span class="comment">%calcule des C:</span>
+C1=(m3-(m1*m2))/(m2-m1);
+C0=(-m2-(C1*m1))/m0;
+<span class="comment">%calcule des z:</span>
+z1=(-C1-sqrt(C1^2-4*C0))/2;
+z2=(-C1+sqrt(C1^2-4*C0))/2;
+seuil=(z1+z2)/2;
+image = double(image);
+<span class="keyword">for</span> i=1:l
+   <span class="keyword">for</span> j=1:c
+       <span class="keyword">if</span> image(i,j)&lt;=seuil
+           v(i,j)=0;
+       <span class="keyword">else</span>
+           v(i,j)=255;
+       <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Inversion_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+imageS=255-double(image);
+imageS=uint8(imageS);
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Niveaudegris_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+[l,c,d]=size(image);
+<span class="keyword">if</span> d==3
+  v=zeros(l,c);
+  <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+          v(i,j)=image(i,j,1)*0.333+image(i,j,2)*0.333+image(i,j,3)*0.333;
+    <span class="keyword">end</span>
+   <span class="keyword">end</span>
+    imageS=uint8(v);
+<span class="keyword">else</span>
+    imageS=imageO;
+<span class="keyword">end</span>
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Luminosite_Callback(hObject, eventdata, handles)
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_Plus_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+<span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        pix=image(i,j)+50;
+         <span class="keyword">if</span>(pix&gt;255)
+            pix=255;
+         <span class="keyword">end</span>
+       v(i,j)=pix;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+imageS=uint8(v);
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_Moins_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+<span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        pix=image(i,j)-50;
+         <span class="keyword">if</span>(pix&lt;0)
+            pix=0;
+         <span class="keyword">end</span>
+       v(i,j)=pix;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+imageS=uint8(v);
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Contraste_Callback(hObject, eventdata, handles)
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_CPlus_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+<span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        pix=(image(i,j)-100)*3 + 100;
+         <span class="keyword">if</span>(pix&gt;255)
+            pix=255;
+         <span class="keyword">elseif</span> (pix&lt;0)
+                pix=0;
+          <span class="keyword">end</span>
+       v(i,j)=pix;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+imageS=uint8(v);
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_CMoins_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+<span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        pix=(image(i,j)-100)/3 + 100;
+         <span class="keyword">if</span>(pix&gt;255)
+            pix=255;
+         <span class="keyword">elseif</span> (pix&lt;0)
+                pix=0;
+          <span class="keyword">end</span>
+       v(i,j)=pix;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+imageS=uint8(v);
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_MisEchelle_Callback(hObject, eventdata, handles)
+
+<span class="keyword">function</span> ssm_MEPlus_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+<span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        pix=1.5*image(i,j);
+         <span class="keyword">if</span>(pix&gt;255)
+            pix=255;
+         <span class="keyword">elseif</span> (pix&lt;0)
+                pix=0;
+          <span class="keyword">end</span>
+       v(i,j)=pix;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_MEMoins_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+<span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        pix=0.5*image(i,j);
+         <span class="keyword">if</span>(pix&gt;255)
+            pix=255;
+         <span class="keyword">elseif</span> (pix&lt;0)
+                pix=0;
+          <span class="keyword">end</span>
+       v(i,j)=pix;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_AmeliorationC_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+d=length(size(image));
+Min=double(min(min(image)));
+Max=double(max(max(image)));
+m=255/(Max-Min);
+<span class="keyword">if</span> d==3
+    b=-m.*Min;
+    imageS=uint8(m.*double(image)+b);
+<span class="keyword">elseif</span> d==2
+    b=-m*Min;
+    imageS=uint8(m*double(image)+b);
+<span class="keyword">end</span>
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Egalisation_Callback(hObject, eventdata, handles)
+<span class="comment">% hObject    handle to sm_Egalisation (see GCBO)</span>
+<span class="comment">% eventdata  reserved - to be defined in a future version of MATLAB</span>
+<span class="comment">% handles    structure with handles and user data (see GUIDATA)</span>
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+    imageS=histeq(image);
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_SommeBruit_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ bruit =imread(<span class="string">'bruit.jpg'</span>) ;
+ [l,c,d]=size(image);
+ [h,k]=size(bruit);
+ <span class="comment">%seuil=128;</span>
+ image=double(image);
+ bruit=double(bruit);
+ v=image;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span> i&lt;h &amp;&amp; j&lt;k
+            v(i,j)=image(i,j)+bruit(i,j);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_DifferenceBruit_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+bruit =imread(<span class="string">'bruit.jpg'</span>) ;
+ [l,c,d]=size(image);
+ [h,k]=size(bruit);
+ <span class="comment">%seuil=128;</span>
+ image=double(image);
+ bruit=double(bruit);
+ v=image;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span> i&lt;h &amp;&amp; j&lt;k
+            v(i,j)=image(i,j)-bruit(i,j);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_ProduitBruit_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+bruit =imread(<span class="string">'bruit.jpg'</span>) ;
+ [l,c,d]=size(image);
+ [h,k]=size(bruit);
+ <span class="comment">%seuil=128;</span>
+ image=double(image);
+ bruit=double(bruit);
+ v=image;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span> i&lt;h &amp;&amp; j&lt;k
+            v(i,j)=image(i,j).*bruit(i,j);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_MoyenneBruit_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+bruit =imread(<span class="string">'bruit.jpg'</span>) ;
+ [l,c,d]=size(image);
+ [h,k]=size(bruit);
+ image=double(image);
+ bruit=double(bruit);
+ v=image;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span> i&lt;h &amp;&amp; j&lt;k
+            v(i,j)=(image(i,j)+bruit(i,j))./2;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_Histogramme_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   img =imageO;
+<span class="keyword">else</span>
+   img =imageS;
+<span class="keyword">end</span>
+d = length(size(img));
+<span class="keyword">if</span> d==3
+    [yRed, x1] = imhist(img(:,:,1));
+    [yGreen, x2] = imhist(img(:,:,2));
+    [yBlue, x3] = imhist(img(:,:,3));
+    plot(x1, yRed, <span class="string">'Red'</span>, x2, yGreen, <span class="string">'Green'</span>, x3, yBlue, <span class="string">'Blue'</span>);
+<span class="keyword">elseif</span> d==2
+[nl,nc]=size(img);
+v=double(img);
+vec=[1:256];
+l=0;
+<span class="keyword">for</span> k=0:255
+    <span class="keyword">for</span> i=1:nl
+        <span class="keyword">for</span> j=1:nc
+            <span class="keyword">if</span> v(i,j)==k
+               l=l+1;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    vec(k+1)=l;
+    l=0;
+<span class="keyword">end</span>
+axes(handles.imgS);
+plot(vec);
+<span class="keyword">end</span>
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_Bruit_Callback(hObject, eventdata, handles)
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_BruitSelPoivre_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+imageS=imnoise(image,<span class="string">'salt &amp; pepper'</span>,0.01);
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_BruitGaussien_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+imageS=imnoise(image,<span class="string">'gaussian'</span>,0.01);
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Speckle_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+imageS=imnoise(image,<span class="string">'speckle'</span>,0.01);
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_FiltrePasseBasL_Callback(hObject, eventdata, handles)
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreMoyenneur_Callback(hObject, eventdata, handles)
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_M3_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[1 1 1;1 1 1;1 1 1]*1/9;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+            <span class="comment">%v(i,j)=image(i-1,j-1)*H(1,1)+image(i-1,j)*H(1,2)+image(i-1,j+1)*H(1,3) +image(i,j-1)*H(2,1)+image(i,j)*H(2,2)+image(i,j+1)*H(2,3)+image(i+1,j-1)*H(3,1)+image(i+1,j)*H(3,2)+image(i+1,j+1)*H(3,3);</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_M5_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[1 1 1 1 1;1 1 1 1 1;1 1 1 1 1;1 1 1 1 1;1 1 1 1 1]*1/25;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreGaussien_Callback(hObject, eventdata, handles)
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_G3_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[1 2 1;2 4 2;1 2 1]*1/16;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+            <span class="comment">%v(i,j)=image(i-1,j-1)*H(1,1)+image(i-1,j)*H(1,2)+image(i-1,j+1)*H(1,3) +image(i,j-1)*H(2,1)+image(i,j)*H(2,2)+image(i,j+1)*H(2,3)+image(i+1,j-1)*H(3,1)+image(i+1,j)*H(3,2)+image(i+1,j+1)*H(3,3);</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_G5_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+H=(1/256)*[1 4 6 4 1 ; 4 16 24 16 4 ; 6 24 36 24 6 ; 4 16 24 16 4 ; 1 4 6 4 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+            <span class="comment">%v(i,j)=image(i-1,j-1)*H(1,1)+image(i-1,j)*H(1,2)+image(i-1,j+1)*H(1,3) +image(i,j-1)*H(2,1)+image(i,j)*H(2,2)+image(i,j+1)*H(2,3)+image(i+1,j-1)*H(3,1)+image(i+1,j)*H(3,2)+image(i+1,j+1)*H(3,3);</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltrePyramidal_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[1 2 3 2 1;2 4 6 4 2;3 6 9 8 3;2 4 6 4 2;1 2 3 2 1]*1/81;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreConique_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[0 0 1 0 0;0 2 2 2 0;1 2 5 2 1;0 2 2 2 0;0 0 1 0 0]*1/25;
+  [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreBinomial_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[1 4 6 4 1;4 16 24 16 4;6 24 36 24 6;4 16 24 16 4;1 4 6 4 1]*1/256;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreRehausseurC_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[1 -3 1;-3 9 -3;1 -3 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreMedian_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+image=double(image);
+[l,c,d]=size(image);
+v=image;
+<span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+               voisin=image(i-1:i+1,j-1:j+1);
+               listv=[voisin(1,:) voisin(2,:) voisin(3,:)];
+               sort(listv);
+               med=median(listv);
+               v(i,j)=med;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_FiltresAdaptatifs_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+H=[1 1 1;1 1 1;1 1 1]*1/9;
+[l,c,d]=size(image);
+v=zeros(l,c);
+image=double(image);
+seuil=30;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> abs(v(i,j)-image(i,j))&gt;=seuil
+            v(i,j)=image(i,j);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_FiltrePasseHaut_Callback(hObject, eventdata, handles)
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Detectiondecontours_Callback(hObject, eventdata, handles)
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_Moyenne3x3_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[-1 -1 -1;-1 8 -1;-1 -1 -1]*1/9;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_Moyenne5x5_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[-1 -1 -1 -1 -1;-1 -1 -1 -1 -1;-1 -1 24 -1 -1;-1 -1 -1 -1 -1;-1 -1 -1 -1 -1]*1/25;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreSobel_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[-1 0 1;-2 0 2;-1 0 1];
+ V=[-1 -2 -1;0 0 0;1 2 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+ h=zeros(l,c);
+ out=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+               h(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=H.*img;
+            h(i,j)=sum(M(:));
+            L=V.*img;
+            v(i,j)=sum(L(:));
+            out(i,j)=sqrt(v(i,j)*v(i,j)+h(i,j)*h(i,j));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(out);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltrePrewitt_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[-1 0 1;-1 0 1;-1 0 1];
+ V=[-1 -1 -1;0 0 0;1 1 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+ h=zeros(l,c);
+ out=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+               h(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=H.*img;
+            h(i,j)=sum(M(:));
+            L=V.*img;
+            v(i,j)=sum(L(:));
+            out(i,j)=sqrt(v(i,j)*v(i,j)+h(i,j)*h(i,j));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(out);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreLaplacien8_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[-1 -1 -1;-1 8 -1;-1 -1 -1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreLaplacien4_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[0 1 0;1 -4 1;0 1 0];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreGradO_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[-1 -1 0;-1 0 1;0 1 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreRobet_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[-1 0 ;0 1];
+ V=[0 -1;1 0];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+ h=zeros(l,c);
+ out=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l-1
+    <span class="keyword">for</span> j=1:c-1
+
+            img=image((i:i+1),(j:j+1));
+            M=H.*img;
+            h(i,j)=sum(M(:));
+            L=V.*img;
+            v(i,j)=sum(L(:));
+            out(i,j)=sqrt(v(i,j)*v(i,j)+h(i,j)*h(i,j));
+            <span class="comment">%out(i,j)=abs(uint8( double(image(i,j))-double(image(i+1,j+1))))+ abs(uint8( double(image(i,j+1)) - double(image(i+1,j))));</span>
+
+
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(out);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FiltreKirsch_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ H=[-3 -3 -3;5 0 -3;5 5 -3];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Marr_Hildreth_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ <span class="comment">%H=[0 -1 -2 -1 0;-1 0 2 0 -1;-2 2 8 2 -2;-1 0 2 0 -1;0 -1 -2 -1 0];</span>
+ H=[-1 -3 -4 -3 -1;-3 0 6 0 -3;-4 6 20 6 -4;-3 0 6 0 -3;-1 -3 -4 -3 -1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="keyword">if</span>(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        <span class="keyword">else</span>
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_FiltreFrequentiel_Callback(hObject, eventdata, handles)
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FPB_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ image=fftshift(fft2(image));
+ [l,c,d]=size(image);
+ H=zeros(l,c);
+ v=H;
+ D=40;
+ l2=round(l/2);
+ c2=round(c/2);
+ H(l2-D:l2+D,c2-D:c2+D)=1;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+       v(i,j)=image(i,j)*H(i,j);
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=ifft2(v);
+axes(handles.imgS);
+imshow(abs(imageS),[0,255]);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FPBB_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ image=fftshift(fft2(image));
+ [l,c,d]=size(image);
+ H=zeros(l,c);
+ v=H;
+ n=3;
+ D0=1;
+ l2=round(l/2);
+ c2=round(c/2);
+ H(l2-D0:l2+D0,c2-D0:c2+D0)=1;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        <span class="comment">%D=sqrt(i^2+j^2);</span>
+        H(i,j)=1/(1+(H(i,j)/D0)^(2*n));
+        v(i,j)=image(i,j)*H(i,j);
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=ifft2(v);
+axes(handles.imgS);
+imshow(abs(imageS),[0,255]);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FPH_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ image=fftshift(fft2(image));
+ [l,c,d]=size(image);
+ H=ones(l,c);
+ v=H;
+ D=2;
+ l2=round(l/2);
+ c2=round(c/2);
+ H(l2-D:l2+D,c2-D:c2+D)=0;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+       v(i,j)=image(i,j)*H(i,j);
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=ifft2(v);
+axes(handles.imgS);
+imshow(255-abs(imageS),[0,255]);
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_FPHB_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+ image=fftshift(fft2(image));
+ [l,c,d]=size(image);
+ H=ones(l,c);
+ v=H;
+ D0=20;
+ n=3;
+ l2=round(l/2);
+ c2=round(c/2);
+ H(l2-D0:l2+D0,c2-D0:c2+D0)=0;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+        D=sqrt(i^2+j^2);
+        H(i,j)=1/(1+(D0/D)^(2*n));
+        v(i,j)=image(i,j)*H(i,j);
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=ifft2(v);
+axes(handles.imgS);
+imshow(255-abs(imageS),[0,255]);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_Morphologie_Callback(hObject, eventdata, handles)
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Erosion_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+lementS=[1 2 1 ;1 3 10 ; 1 2 1];
+inputImge=double(image);
+[l,c,d]=size(image);
+outputImg=zeros(l,c);
+<span class="keyword">if</span>(islogical(outputImg))
+  <span class="keyword">for</span> i = 1:l
+    <span class="keyword">for</span> j = 1:c
+        <span class="keyword">if</span> i-1&gt;0 &amp;&amp; j-1&gt;0 &amp;&amp; i+1&lt;=255 &amp;&amp; j+1&lt;=255
+        img=inputImge((i-1:i+1),(j-1:j+1));
+        M=img-lementS;
+        <span class="keyword">else</span>
+          M=255;
+        <span class="keyword">end</span>
+        outputImg(i,j) = min(M(:));
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+    imageS=uint8(outputImg);
+<span class="keyword">else</span>
+    s=strel(<span class="string">'square'</span>,3);
+    imageS=imerode(image,s);
+<span class="keyword">end</span>
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Dilatation_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+lementS=[1 2 1 ;1 3 10 ; 1 2 1];
+inputImge=double(image);
+[l,c,d]=size(image);
+outputImg=zeros(l,c);
+<span class="keyword">if</span>(islogical(outputImg))
+<span class="keyword">for</span> i = 1:l
+    <span class="keyword">for</span> j = 1:c
+        <span class="keyword">if</span> i-1&gt;0 &amp;&amp; j-1&gt;0 &amp;&amp; i+1&lt;=255 &amp;&amp; j+1&lt;=255
+        img=inputImge((i-1:i+1),(j-1:j+1));
+        M=img+lementS;
+        <span class="keyword">else</span>
+          M=0;
+        <span class="keyword">end</span>
+        outputImg(i,j) = max(M(:));
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+    imageS=uint8(outputImg);
+<span class="keyword">else</span>
+    s=strel(<span class="string">'square'</span>,3);
+    imageS=imdilate(image,s);
+<span class="keyword">end</span>
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Ouverture_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+<span class="comment">%s=strel('square',3);</span>
+s= strel(<span class="string">'disk'</span>,10);
+c2=imerode(image,s);
+imageS=uint8(imdilate(c2,s)); <span class="comment">% dilatation(erosion(image))</span>
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Fermeture_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+<span class="comment">%s=strel('square',3);</span>
+s= strel(<span class="string">'disk'</span>,10);
+c2=imdilate(image,s);
+imageS=imerode(c2,s); <span class="comment">% erosion(dilatation(image))</span>
+
+axes(handles.imgS);
+imshow(imerode(c2,s));
+
+
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_Contour_Callback(hObject, eventdata, handles)
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_ContourI_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+<span class="comment">%s=strel('square',3);</span>
+s= strel(<span class="string">'disk'</span>,5);
+imageErode=imerode(image,s);
+[l,c,d]=size(image);
+image=double(image);
+imageErode=double(imageErode);
+v=image;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+            v(i,j)=image(i,j)-imageErode(i,j);
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> ssm_ContourE_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+<span class="comment">%s=strel('square',3);</span>
+s= strel(<span class="string">'disk'</span>,5);
+imageDilate=imdilate(image,s);
+[l,c,d]=size(imageDilate);
+image=double(image);
+imageDilate=double(imageDilate);
+v=image;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+            v(i,j)=imageDilate(i,j)-image(i,j);
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_ContourMorphologique_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+<span class="comment">%s=strel('square',3);</span>
+s= strel(<span class="string">'disk'</span>,5);
+imageDilate=imdilate(image,s);
+imageErode=imerode(image,s);
+[l,c,d]=size(imageDilate);
+imageErode=double(imageErode);
+imageDilate=double(imageDilate);
+v=imageDilate;
+ <span class="keyword">for</span> i=1:l
+    <span class="keyword">for</span> j=1:c
+            v(i,j)=imageDilate(i,j)-imageErode(i,j);
+    <span class="keyword">end</span>
+ <span class="keyword">end</span>
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> menu_PointsDinteret_Callback(hObject, eventdata, handles)
+
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_SUSAN_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   im =imageO;
+<span class="keyword">else</span>
+   im=imageS;
+<span class="keyword">end</span>
+<span class="comment">% =======================conversion de l'image=============================</span>
+d = length(size(im));
+    <span class="keyword">if</span> d==3
+        image=double(rgb2gray(im));
+    <span class="keyword">elseif</span> d==2
+        image=double(im);
+    <span class="keyword">end</span>
+[n,m]=size(image);
+<span class="comment">% =============================donn&eacute;es=====================================</span>
+rayon=1;
+alpha=80;
+r=5;
+alpha=alpha/100;
+<span class="comment">% ========================g&eacute;nerateur de mask=============================</span>
+mask=zeros(2*rayon+1);
+b=ones(rayon+1);
+<span class="keyword">for</span> i=1:rayon+1
+    <span class="keyword">for</span> j=1:rayon+1
+        <span class="keyword">if</span> (rayon==1)
+            <span class="keyword">if</span>(j&gt;i)
+            b(i,j)=0;
+            <span class="keyword">end</span>
+        <span class="keyword">else</span>
+            <span class="keyword">if</span>(j&gt;i+1)
+            b(i,j)=0;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+mask(1:rayon+1,rayon+1:2*rayon+1)=b;
+mask(1:rayon+1,1:rayon+1)=rot90(b);
+mask0=mask;
+mask0=flipdim(mask0,1);
+mask=mask0+mask;
+mask(rayon+1,:)=mask(rayon+1,:)-1;
+<span class="comment">% ==========================r&eacute;ponse maximale============================</span>
+max_reponse=sum(sum(mask));
+<span class="comment">% =====================balayage de toute l'image===========================</span>
+f=zeros(n,m);
+<span class="keyword">for</span> i=(rayon+1):n-rayon
+    <span class="keyword">for</span> j=(rayon+1):m-rayon
+        image_courant=image(i-rayon:i+rayon,j-rayon:j+rayon);
+        image_courant_mask=image_courant.*mask;
+        inteniste_cental= image_courant_mask(rayon+1,rayon+1);
+        s=exp(-1*(((image_courant_mask-inteniste_cental)/max_reponse).^6));
+        somme=sum(sum(s));
+<span class="comment">% si le centre du mask est un 0 il faut soustraire les zeros des filtres</span>
+       <span class="keyword">if</span> (inteniste_cental==0)
+        somme=somme-length((find(mask==0)));
+       <span class="keyword">end</span>
+        f(i,j)=somme;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% =============selection et seuillage des points d'inter&eacute;t=================</span>
+ff=f(rayon+1:n-(rayon+1),rayon+1:m-(rayon+1));
+minf=min(min(ff));
+maxf=max(max(f));
+fff=f;
+d=2*r+1;
+temp1=round(n/d);
+   <span class="keyword">if</span> (temp1-n/d)&lt;0.5 &amp;(temp1-n/d)&gt;0
+    temp1=temp1-1;
+   <span class="keyword">end</span>
+    temp2=round(m/d);
+   <span class="keyword">if</span> (temp2-m/d)&lt;0.5 &amp;(temp2-m/d)&gt;0
+    temp2=temp2-1;
+   <span class="keyword">end</span>
+    fff(n:temp1*d+d,m:temp2*d+d)=0;
+
+<span class="keyword">for</span> i=(r+1):d:temp1*d+d
+   <span class="keyword">for</span> j=(r+1):d:temp2*d+d
+        window=fff(i-r:i+r,j-r:j+r);
+        window0=window;
+        [xx,yy]=find(window0==0);
+        <span class="keyword">for</span> k=1:length(xx)
+            window0(xx(k),yy(k))=max(max(window0));
+        <span class="keyword">end</span>
+        minwindow=min(min(window0));
+        [y,x]=find(minwindow~=window &amp; window&lt;=minf+alpha*(maxf-minf) &amp; window&gt;0);
+        [u,v]=find(minwindow==window);
+    <span class="keyword">if</span> length(u)&gt;1
+        <span class="keyword">for</span> l=2:length(u)
+            fff(i-r-1+u(l),j-r-1+v(l))=0 ;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+   <span class="keyword">if</span> length(x)~=0
+    <span class="keyword">for</span> l=1:length(y)
+        fff(i-r-1+y(l),j-r-1+x(l))=0 ;
+    <span class="keyword">end</span>
+   <span class="keyword">end</span>
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+seuil=minf+alpha*(maxf-minf);
+[u,v]=find(minf&lt;=fff &amp; fff&lt;=seuil );
+
+<span class="comment">% ==============affichage des resultats====================================</span>
+imageS=im;
+axes(handles.imgS);
+imshow(im);
+hold <span class="string">on</span>;
+plot(v,u,<span class="string">'.r'</span>,<span class="string">'MarkerSize'</span>,10);
+hold <span class="string">off</span>;
+message = sprintf(<span class="string">' le nombre des points d''int&eacute;r&ecirc;ts: %d      '</span>,length(v));
+msgbox(message);
+
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_HARRIS_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+img=image;
+[m,n,d]=size(img);
+<span class="keyword">if</span>(d==3)
+    img=rgb2gray(img);
+<span class="keyword">end</span>
+<span class="comment">%==========================================================================</span>
+lambda=0.04;
+sigma=1; seuil=200; r=6; w=5*sigma;
+imd=double(img);
+dx=[-1 0 1
+    -2 0 2
+    -1 0 1]; <span class="comment">% deriv&eacute;e horizontale : filtre de Sobel</span>
+dy=dx'; <span class="comment">% deriv&eacute;e verticale : filtre de Sobel</span>
+g = fspecial(<span class="string">'gaussian'</span>,max(1,fix(w)), sigma);
+Ix=conv2(imd,dx,<span class="string">'same'</span>);
+Iy=conv2(imd,dy,<span class="string">'same'</span>);
+Ix2=conv2(Ix.^2, g, <span class="string">'same'</span>);
+Iy2=conv2(Iy.^2, g, <span class="string">'same'</span>);
+Ixy=conv2(Ix.*Iy, g,<span class="string">'same'</span>);
+detM=Ix2.*Iy2-Ixy.^2;
+trM=Ix2+Iy2;
+R=detM-lambda*trM.^2;
+<span class="comment">%==========================================================================</span>
+R1=(1000/(1+max(max(R))))*R;
+<span class="comment">%==========================================================================</span>
+[u,v]=find(R1&lt;=seuil);
+nb=length(u);
+<span class="keyword">for</span> k=1:nb
+    R1(u(k),v(k))=0;
+<span class="keyword">end</span>
+R11=zeros(m+2*r,n+2*r);
+R11(r+1:m+r,r+1:n+r)=R1;
+[m1,n1]=size(R11);
+<span class="keyword">for</span> i=r+1:m1-r
+    <span class="keyword">for</span> j=r+1:n1-r
+        fenetre=R11(i-r:i+r,j-r:j+r);
+        ma=max(max(fenetre));
+        <span class="keyword">if</span> fenetre(r+1,r+1)&lt;ma
+            R11(i,j)=0;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+R11=R11(r+1:m+r,r+1:n+r);
+[x,y]=find(R11);
+imageS=img;
+axes(handles.imgS);
+imshow(img);
+hold <span class="string">on</span>;
+plot(y,x,<span class="string">'.r'</span>,<span class="string">'MarkerSize'</span>,10);
+hold <span class="string">off</span>;
+message = sprintf(<span class="string">' le nombre des points d''int&eacute;r&ecirc;ts: %d      '</span>,length(x));
+msgbox(message);
+
+
+<span class="comment">% --------------------------------------------------------------------</span>
+<span class="keyword">function</span> sm_HARRISME_Callback(hObject, eventdata, handles)
+<span class="keyword">global</span> imageS;
+<span class="keyword">global</span> imageO;
+<span class="keyword">global</span> check;
+<span class="keyword">if</span> check==0
+   image =imageO;
+<span class="keyword">else</span>
+   image =imageS;
+<span class="keyword">end</span>
+img=image;
+[m,n,d]=size(img);
+<span class="keyword">if</span>(d==3)
+    img=rgb2gray(img);
+<span class="keyword">end</span>
+<span class="comment">%==========================================================================</span>
+k=0.04; sigma=1; seuil=100; r=6;
+imd=double(img);
+dxa=[-sqrt(2)/4 0 sqrt(2)/4 ; -1 0 1 ; -sqrt(2)/4 0 sqrt(2)/4];
+dya=dxa'; <span class="comment">% deriv&eacute;e verticale</span>
+g=fspecial(<span class="string">'gaussian'</span>,max(1,fix(5*sigma)),sigma); <span class="comment">% gaussien</span>
+Ixa=conv2(imd,dxa,<span class="string">'same'</span>);
+Iya=conv2(imd,dya,<span class="string">'same'</span>);
+Ixa2 = conv2(Ixa.^2, g, <span class="string">'same'</span>);
+Iya2 = conv2(Iya.^2, g, <span class="string">'same'</span>);
+Ixya = conv2(Ixa.*Iya, g,<span class="string">'same'</span>);
+R=Ixa2.*Iya2-Ixya.^2-k*(Ixa2+Iya2).^2;
+R1=(1000/(max(max(R))))*R; <span class="comment">%normalisation</span>
+[u,v]=find(R1&lt;=seuil);
+nb=length(u);
+<span class="keyword">for</span> k=1:nb
+    R1(u(k),v(k))=0;
+<span class="keyword">end</span>
+R11=zeros(m+2*r,n+2*r);
+R11(r+1:m+r,r+1:n+r)=R1;
+[m1,n1]=size(R11);
+<span class="keyword">for</span> i=r+1:m1-r
+    <span class="keyword">for</span> j=r+1:n1-r
+        fenetre=R11(i-r:i+r,j-r:j+r);
+        ma=max(max(fenetre));
+        <span class="keyword">if</span> fenetre(r+1,r+1)&lt;ma
+        R11(i,j)=0;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+R11=R11(r+1:m+r,r+1:n+r);
+[x,y]=find(R11);
+imageS=img;
+axes(handles.imgS);
+imshow(img);
+hold <span class="string">on</span>;
+plot(y,x,<span class="string">'.r'</span>,<span class="string">'MarkerSize'</span>,10);
+hold <span class="string">off</span>;
+message = sprintf(<span class="string">' le nombre des points d''int&eacute;r&ecirc;ts: %d      '</span>,length(x));
+msgbox(message);
+</pre><pre class="codeoutput error">Error using dbstatus
+File: C:\Users\PC\Desktop\BDSaS\S1_BDSaS\Computer Vision\TPs\TP-imagerie-version-finale-2021\application Matlab\projets _master_MIDVI18\monprojet_nabil _ehharchoud\Fenetre.m Line: 53 Column: 36
+Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for mismatched delimiters.
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function varargout = Fenetre(varargin)
+gui_Singleton = 1;
+gui_State = struct('gui_Name',       mfilename, ...
+                   'gui_Singleton',  gui_Singleton, ...
+                   'gui_OpeningFcn', @Fenetre_OpeningFcn, ...
+                   'gui_OutputFcn',  @Fenetre_OutputFcn, ...
+                   'gui_LayoutFcn',  [] , ...
+                   'gui_Callback',   []);
+if nargin && ischar(varargin{1})
+    gui_State.gui_Callback = str2func(varargin{1});
+end
+
+if nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+else
+    gui_mainfcn(gui_State, varargin{:});
+end
+
+
+% REPLACE_WITH_DASH_DASH- Executes just before Fenetre is made visible.
+function Fenetre_OpeningFcn(hObject, eventdata, handles, varargin)
+handles.output = hObject;
+guidata(hObject, handles);
+ah = axes('unit', 'normalized', 'position', [0 0 1 1]); 
+bg = imread('background.jpg'); imagesc(bg);
+set(ah,'handlevisibility','off','visible','off')
+uistack(ah, 'bottom');
+global check;
+check=0;
+
+function varargout = Fenetre_OutputFcn(hObject, eventdata, handles) 
+varargout{1} = handles.output;
+
+function checkbox1_Callback(hObject, eventdata, handles)
+global check;
+a=get(handles.checkbox1,'Value');
+if (a==1)
+ check=1; 
+end 
+if (a==0)
+ check=0; 
+end 
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_Fichier_Callback(hObject, eventdata, handles)
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_Apropos_Callback(hObject, eventdata, handles)
+AproposFig=figure('Name','À-propos', ...
+   'NumberTitle','off',...
+   'tag', 'A propos', ...
+   'BusyAction','Queue','Interruptible','off', ...
+%    'Color', [162 244 199]/256,...
+   'position',[400 300 300 220],...
+   'IntegerHandle', 'off', ...
+   'WindowStyle','modal',...
+   'Colormap', gray(256));
+
+Std.Interruptible = 'off';
+Std.BusyAction = 'queue';
+Ctl = Std;
+Ctl.Units = 'Pixels';
+Ctl.Parent = AproposFig;
+
+texte=Ctl;
+texte.Interruptible='off';
+texte.Style='text';
+texte.Horiz='left';
+texte.Background=[162 244 199]/256;
+texte.Foreground='blue';
+texte.FontWeight='bold';
+texte.Fontsize=12;
+
+% %%/******* text label A Propos **************/
+chaine1='Ce projet a été réalisé par :';
+hs.hTexteApropos=uicontrol(texte,...
+   'Foreground','black',...
+   'Position',[20 110 220 100], ...
+   'String',chaine1);
+
+chaine2='Nabil Elhanchoud';
+hs.hTexteApropos=uicontrol(texte,...
+   'Position',[60 85 180 100], ...
+   'String',chaine2);
+
+chaine3='Encadré Par : ';
+hs.hTexteApropos=uicontrol(texte,...
+   'Foreground','black',...
+   'Position',[20 45 140 100], ...
+   'String',chaine3);
+
+chaine3='M.Hamid Tahiri';
+hs.hTexteApropos=uicontrol(texte,...
+   'Position',[60 20 140 100], ...
+   'String',chaine3);
+
+chaine6='Master MIDVI - 20017/20019';
+hs.hTexteApropos=uicontrol(texte,...
+   'Foreground','black',...
+   'Position',[50 -30 260 100], ...
+   'String',chaine6);
+
+%==============================================================
+%/*** le bouton ok
+h.hBtnOk=uicontrol( ...
+   'Parent',AproposFig, ...
+   'BusyAction','Queue','Interruptible','off',...
+   'Style','pushbutton', ...
+   'Units','pixels', ...
+   'Position',[100 10 100 25], ...
+   'String','Ok', ...
+   'Callback','close(gcf)');
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Ouvrir_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+[file,path] = uigetfile('*.*');
+imageO = imread(sprintf('%s',path,file));
+axes(handles.imgO)
+imshow(imageO);
+axes(handles.imgS)
+imageS=zeros();
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Enregister_Callback(hObject, eventdata, handles)
+global imageS 
+[file,path] = uiputfile('*.png','Enregistre');
+imwrite(imageS, sprintf('%s',path,file),'png');
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Quitter_Callback(hObject, eventdata, handles)
+delete(handles.figure1)
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_Transformation_Callback(hObject, eventdata, handles)
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Binarisation_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+[l,c,d]=size(image);
+v=zeros(l,c);
+seuil=128;
+if d==3
+    image=rgb2gray(image); 
+end
+image = double(image);
+for i=1:l
+   for j=1:c
+       if image(i,j)<seuil
+           v(i,j)=0;
+       else
+           v(i,j)=255;
+       end 
+    end
+ end 
+imageS=uint8(v); 
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_BinarisationS_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+[l,c,d]=size(image);
+v=zeros(l,c);
+if d==3
+    image=rgb2gray(image); 
+end
+% Calcule du seuil
+m0=1;
+m1=mean2(image);
+m2=mean2(image.^2);
+m3=mean2(image.^3);
+%calcule des C:
+C1=(m3-(m1*m2))/(m2-m1);
+C0=(-m2-(C1*m1))/m0;
+%calcule des z:
+z1=(-C1-sqrt(C1^2-4*C0))/2;
+z2=(-C1+sqrt(C1^2-4*C0))/2;
+seuil=(z1+z2)/2;
+image = double(image);
+for i=1:l
+   for j=1:c
+       if image(i,j)<=seuil
+           v(i,j)=0;
+       else
+           v(i,j)=255;
+       end 
+    end
+ end 
+imageS=uint8(v); 
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Inversion_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+imageS=255-double(image);
+imageS=uint8(imageS); 
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Niveaudegris_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+[l,c,d]=size(image);
+if d==3
+  v=zeros(l,c);
+  for i=1:l
+    for j=1:c
+          v(i,j)=image(i,j,1)*0.333+image(i,j,2)*0.333+image(i,j,3)*0.333;
+    end
+   end
+    imageS=uint8(v); 
+else
+    imageS=imageO;
+end
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Luminosite_Callback(hObject, eventdata, handles)
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_Plus_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+for i=1:l
+    for j=1:c
+        pix=image(i,j)+50;
+         if(pix>255)
+            pix=255;
+         end
+       v(i,j)=pix;    
+    end
+end  
+imageS=uint8(v);
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_Moins_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+for i=1:l
+    for j=1:c
+        pix=image(i,j)-50;
+         if(pix<0)
+            pix=0; 
+         end
+       v(i,j)=pix;    
+    end
+end  
+imageS=uint8(v); 
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Contraste_Callback(hObject, eventdata, handles)
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_CPlus_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+for i=1:l
+    for j=1:c
+        pix=(image(i,j)-100)*3 + 100;
+         if(pix>255)
+            pix=255;
+         elseif (pix<0)
+                pix=0; 
+          end
+       v(i,j)=pix;    
+    end
+end  
+imageS=uint8(v);
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_CMoins_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+for i=1:l
+    for j=1:c
+        pix=(image(i,j)-100)/3 + 100;
+         if(pix>255)
+            pix=255;
+         elseif (pix<0)
+                pix=0; 
+          end
+       v(i,j)=pix;    
+    end
+end  
+imageS=uint8(v); 
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_MisEchelle_Callback(hObject, eventdata, handles)
+
+function ssm_MEPlus_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+for i=1:l
+    for j=1:c
+        pix=1.5*image(i,j);
+         if(pix>255)
+            pix=255;
+         elseif (pix<0)
+                pix=0; 
+          end
+       v(i,j)=pix;    
+    end
+end  
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_MEMoins_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+[l,c,d]=size(image);
+image = double(image);
+v=image;
+for i=1:l
+    for j=1:c
+        pix=0.5*image(i,j);
+         if(pix>255)
+            pix=255;
+         elseif (pix<0)
+                pix=0; 
+          end
+       v(i,j)=pix;    
+    end
+end  
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_AmeliorationC_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+d=length(size(image));
+Min=double(min(min(image)));
+Max=double(max(max(image)));
+m=255/(Max-Min);
+if d==3
+    b=-m.*Min;
+    imageS=uint8(m.*double(image)+b);
+elseif d==2
+    b=-m*Min;
+    imageS=uint8(m*double(image)+b);
+end
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Egalisation_Callback(hObject, eventdata, handles)
+% hObject    handle to sm_Egalisation (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+    imageS=histeq(image);
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_SommeBruit_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ bruit =imread('bruit.jpg') ;
+ [l,c,d]=size(image);
+ [h,k]=size(bruit);
+ %seuil=128;
+ image=double(image);
+ bruit=double(bruit);
+ v=image;
+ for i=1:l
+    for j=1:c
+        if i<h && j<k
+            v(i,j)=image(i,j)+bruit(i,j);
+        end
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_DifferenceBruit_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+bruit =imread('bruit.jpg') ;
+ [l,c,d]=size(image);
+ [h,k]=size(bruit);
+ %seuil=128;
+ image=double(image);
+ bruit=double(bruit);
+ v=image;
+ for i=1:l
+    for j=1:c
+        if i<h && j<k
+            v(i,j)=image(i,j)-bruit(i,j);
+        end
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_ProduitBruit_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+bruit =imread('bruit.jpg') ;
+ [l,c,d]=size(image);
+ [h,k]=size(bruit);
+ %seuil=128;
+ image=double(image);
+ bruit=double(bruit);
+ v=image;
+ for i=1:l
+    for j=1:c
+        if i<h && j<k
+            v(i,j)=image(i,j).*bruit(i,j);
+        end
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_MoyenneBruit_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+bruit =imread('bruit.jpg') ;
+ [l,c,d]=size(image);
+ [h,k]=size(bruit);
+ image=double(image);
+ bruit=double(bruit);
+ v=image;
+ for i=1:l
+    for j=1:c
+        if i<h && j<k
+            v(i,j)=(image(i,j)+bruit(i,j))./2;
+        end
+    end
+ end
+imageS=uint8(v); 
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_Histogramme_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   img =imageO;
+else
+   img =imageS;
+end
+d = length(size(img));
+if d==3
+    [yRed, x1] = imhist(img(:,:,1));
+    [yGreen, x2] = imhist(img(:,:,2));
+    [yBlue, x3] = imhist(img(:,:,3));
+    plot(x1, yRed, 'Red', x2, yGreen, 'Green', x3, yBlue, 'Blue');
+elseif d==2
+[nl,nc]=size(img);
+v=double(img);
+vec=[1:256];
+l=0;
+for k=0:255 
+    for i=1:nl
+        for j=1:nc
+            if v(i,j)==k 
+               l=l+1;
+            end
+        end
+    end
+    vec(k+1)=l;
+    l=0;
+end
+axes(handles.imgS);
+plot(vec);
+end
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_Bruit_Callback(hObject, eventdata, handles)
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_BruitSelPoivre_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+imageS=imnoise(image,'salt & pepper',0.01);
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_BruitGaussien_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+imageS=imnoise(image,'gaussian',0.01);
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Speckle_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+imageS=imnoise(image,'speckle',0.01);
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_FiltrePasseBasL_Callback(hObject, eventdata, handles)
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreMoyenneur_Callback(hObject, eventdata, handles)
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_M3_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[1 1 1;1 1 1;1 1 1]*1/9;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+            %v(i,j)=image(i-1,j-1)*H(1,1)+image(i-1,j)*H(1,2)+image(i-1,j+1)*H(1,3) +image(i,j-1)*H(2,1)+image(i,j)*H(2,2)+image(i,j+1)*H(2,3)+image(i+1,j-1)*H(3,1)+image(i+1,j)*H(3,2)+image(i+1,j+1)*H(3,3);   
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_M5_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[1 1 1 1 1;1 1 1 1 1;1 1 1 1 1;1 1 1 1 1;1 1 1 1 1]*1/25;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        else
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreGaussien_Callback(hObject, eventdata, handles)
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_G3_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[1 2 1;2 4 2;1 2 1]*1/16;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+            %v(i,j)=image(i-1,j-1)*H(1,1)+image(i-1,j)*H(1,2)+image(i-1,j+1)*H(1,3) +image(i,j-1)*H(2,1)+image(i,j)*H(2,2)+image(i,j+1)*H(2,3)+image(i+1,j-1)*H(3,1)+image(i+1,j)*H(3,2)+image(i+1,j+1)*H(3,3);   
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_G5_Callback(hObject, eventdata, handles)
+global imageO;
+global imageS;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+H=(1/256)*[1 4 6 4 1 ; 4 16 24 16 4 ; 6 24 36 24 6 ; 4 16 24 16 4 ; 1 4 6 4 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        else
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+            %v(i,j)=image(i-1,j-1)*H(1,1)+image(i-1,j)*H(1,2)+image(i-1,j+1)*H(1,3) +image(i,j-1)*H(2,1)+image(i,j)*H(2,2)+image(i,j+1)*H(2,3)+image(i+1,j-1)*H(3,1)+image(i+1,j)*H(3,2)+image(i+1,j+1)*H(3,3);   
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltrePyramidal_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[1 2 3 2 1;2 4 6 4 2;3 6 9 8 3;2 4 6 4 2;1 2 3 2 1]*1/81;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        else
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));      
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreConique_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[0 0 1 0 0;0 2 2 2 0;1 2 5 2 1;0 2 2 2 0;0 0 1 0 0]*1/25;
+  [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        else
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));      
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreBinomial_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[1 4 6 4 1;4 16 24 16 4;6 24 36 24 6;4 16 24 16 4;1 4 6 4 1]*1/256;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        else
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreRehausseurC_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[1 -3 1;-3 9 -3;1 -3 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreMedian_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+image=double(image);
+[l,c,d]=size(image);
+v=image;
+for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+               voisin=image(i-1:i+1,j-1:j+1);
+               listv=[voisin(1,:) voisin(2,:) voisin(3,:)];
+               sort(listv);
+               med=median(listv);
+               v(i,j)=med;
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_FiltresAdaptatifs_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+H=[1 1 1;1 1 1;1 1 1]*1/9;
+[l,c,d]=size(image);
+v=zeros(l,c);
+image=double(image);
+seuil=30;
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end 
+        if abs(v(i,j)-image(i,j))>=seuil
+            v(i,j)=image(i,j);
+        end
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_FiltrePasseHaut_Callback(hObject, eventdata, handles)
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Detectiondecontours_Callback(hObject, eventdata, handles)
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_Moyenne3x3_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[-1 -1 -1;-1 8 -1;-1 -1 -1]*1/9;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end 
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_Moyenne5x5_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[-1 -1 -1 -1 -1;-1 -1 -1 -1 -1;-1 -1 24 -1 -1;-1 -1 -1 -1 -1;-1 -1 -1 -1 -1]*1/25;
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        else
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end 
+        
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreSobel_Callback(hObject, eventdata, handles)
+global imageO;
+global imageS;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[-1 0 1;-2 0 2;-1 0 1];
+ V=[-1 -2 -1;0 0 0;1 2 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+ h=zeros(l,c);
+ out=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+               h(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=H.*img;
+            h(i,j)=sum(M(:));
+            L=V.*img;
+            v(i,j)=sum(L(:));
+            out(i,j)=sqrt(v(i,j)*v(i,j)+h(i,j)*h(i,j));
+        end      
+    end
+ end
+imageS=uint8(out); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltrePrewitt_Callback(hObject, eventdata, handles)
+global imageO;
+global imageS;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[-1 0 1;-1 0 1;-1 0 1];
+ V=[-1 -1 -1;0 0 0;1 1 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+ h=zeros(l,c);
+ out=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+               h(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=H.*img;
+            h(i,j)=sum(M(:));
+            L=V.*img;
+            v(i,j)=sum(L(:));
+            out(i,j)=sqrt(v(i,j)*v(i,j)+h(i,j)*h(i,j));
+        end      
+    end
+ end
+imageS=uint8(out); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreLaplacien8_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[-1 -1 -1;-1 8 -1;-1 -1 -1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreLaplacien4_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[0 1 0;1 -4 1;0 1 0];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreGradO_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[-1 -1 0;-1 0 1;0 1 1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreRobet_Callback(hObject, eventdata, handles)
+global imageO;
+global imageS;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[-1 0 ;0 1];
+ V=[0 -1;1 0];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+ h=zeros(l,c);
+ out=zeros(l,c);
+image=double(image);
+ for i=1:l-1
+    for j=1:c-1
+        
+            img=image((i:i+1),(j:j+1));
+            M=H.*img;
+            h(i,j)=sum(M(:));
+            L=V.*img;
+            v(i,j)=sum(L(:));
+            out(i,j)=sqrt(v(i,j)*v(i,j)+h(i,j)*h(i,j));
+            %out(i,j)=abs(uint8( double(image(i,j))-double(image(i+1,j+1))))+ abs(uint8( double(image(i,j+1)) - double(image(i+1,j))));
+             
+             
+    end
+ end
+imageS=uint8(out); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FiltreKirsch_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ H=[-3 -3 -3;5 0 -3;5 5 -3];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c)
+               v(i,j)=0;
+        else
+            img=image((i-1:i+1),(j-1:j+1));
+            M=img.*H;
+            v(i,j)=sum(M(:));
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Marr_Hildreth_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ %H=[0 -1 -2 -1 0;-1 0 2 0 -1;-2 2 8 2 -2;-1 0 2 0 -1;0 -1 -2 -1 0];
+ H=[-1 -3 -4 -3 -1;-3 0 6 0 -3;-4 6 20 6 -4;-3 0 6 0 -3;-1 -3 -4 -3 -1];
+ [l,c,d]=size(image);
+ v=zeros(l,c);
+image=double(image);
+ for i=1:l
+    for j=1:c
+        if(i==1||j==1||i==l||j==c||i==2||j==2||i==l-1||j==c-1)
+               v(i,j)=0;
+        else
+            img=image((i-2:i+2),(j-2:j+2));
+            M=img.*H;
+            v(i,j)=sum(M(:));      
+        end      
+    end
+ end
+imageS=uint8(v); 
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_FiltreFrequentiel_Callback(hObject, eventdata, handles)
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FPB_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ image=fftshift(fft2(image));
+ [l,c,d]=size(image); 
+ H=zeros(l,c);
+ v=H;
+ D=40;
+ l2=round(l/2); 
+ c2=round(c/2);
+ H(l2-D:l2+D,c2-D:c2+D)=1; 
+ for i=1:l
+    for j=1:c
+       v(i,j)=image(i,j)*H(i,j);       
+    end
+ end
+imageS=ifft2(v); 
+axes(handles.imgS);
+imshow(abs(imageS),[0,255]);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FPBB_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ image=fftshift(fft2(image));
+ [l,c,d]=size(image); 
+ H=zeros(l,c);
+ v=H;
+ n=3;
+ D0=1;
+ l2=round(l/2); 
+ c2=round(c/2);
+ H(l2-D0:l2+D0,c2-D0:c2+D0)=1; 
+ for i=1:l
+    for j=1:c
+        %D=sqrt(i^2+j^2);
+        H(i,j)=1/(1+(H(i,j)/D0)^(2*n)); 
+        v(i,j)=image(i,j)*H(i,j);  
+    end
+ end
+imageS=ifft2(v); 
+axes(handles.imgS);
+imshow(abs(imageS),[0,255]);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FPH_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ image=fftshift(fft2(image));
+ [l,c,d]=size(image); 
+ H=ones(l,c);
+ v=H;
+ D=2;
+ l2=round(l/2); 
+ c2=round(c/2);
+ H(l2-D:l2+D,c2-D:c2+D)=0; 
+ for i=1:l
+    for j=1:c
+       v(i,j)=image(i,j)*H(i,j);       
+    end
+ end
+imageS=ifft2(v); 
+axes(handles.imgS);
+imshow(255-abs(imageS),[0,255]);
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_FPHB_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+ image=fftshift(fft2(image));
+ [l,c,d]=size(image); 
+ H=ones(l,c);
+ v=H;
+ D0=20;
+ n=3;
+ l2=round(l/2); 
+ c2=round(c/2);
+ H(l2-D0:l2+D0,c2-D0:c2+D0)=0; 
+ for i=1:l
+    for j=1:c
+        D=sqrt(i^2+j^2);
+        H(i,j)=1/(1+(D0/D)^(2*n)); 
+        v(i,j)=image(i,j)*H(i,j);       
+    end
+ end
+imageS=ifft2(v); 
+axes(handles.imgS);
+imshow(255-abs(imageS),[0,255]);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_Morphologie_Callback(hObject, eventdata, handles)
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Erosion_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+lementS=[1 2 1 ;1 3 10 ; 1 2 1];
+inputImge=double(image);
+[l,c,d]=size(image);
+outputImg=zeros(l,c);
+if(islogical(outputImg))
+  for i = 1:l
+    for j = 1:c
+        if i-1>0 && j-1>0 && i+1<=255 && j+1<=255 
+        img=inputImge((i-1:i+1),(j-1:j+1));
+        M=img-lementS;
+        else
+          M=255;  
+        end
+        outputImg(i,j) = min(M(:));       
+    end
+  end
+    imageS=uint8(outputImg);   
+else
+    s=strel('square',3);
+    imageS=imerode(image,s);
+end
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Dilatation_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+lementS=[1 2 1 ;1 3 10 ; 1 2 1];
+inputImge=double(image);
+[l,c,d]=size(image);
+outputImg=zeros(l,c);
+if(islogical(outputImg))
+for i = 1:l
+    for j = 1:c
+        if i-1>0 && j-1>0 && i+1<=255 && j+1<=255 
+        img=inputImge((i-1:i+1),(j-1:j+1));
+        M=img+lementS;
+        else
+          M=0;  
+        end
+        outputImg(i,j) = max(M(:)); 
+    end
+end
+    imageS=uint8(outputImg);   
+else
+    s=strel('square',3);
+    imageS=imdilate(image,s);
+end
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Ouverture_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+%s=strel('square',3);
+s= strel('disk',10);
+c2=imerode(image,s);
+imageS=uint8(imdilate(c2,s)); % dilatation(erosion(image))
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Fermeture_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+%s=strel('square',3);
+s= strel('disk',10);
+c2=imdilate(image,s);
+imageS=imerode(c2,s); % erosion(dilatation(image))
+
+axes(handles.imgS);
+imshow(imerode(c2,s));
+
+
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_Contour_Callback(hObject, eventdata, handles)
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_ContourI_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+%s=strel('square',3);
+s= strel('disk',5);
+imageErode=imerode(image,s);
+[l,c,d]=size(image);
+image=double(image);
+imageErode=double(imageErode);
+v=image;
+ for i=1:l
+    for j=1:c
+            v(i,j)=image(i,j)-imageErode(i,j);       
+    end
+ end
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function ssm_ContourE_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+%s=strel('square',3);
+s= strel('disk',5);
+imageDilate=imdilate(image,s);
+[l,c,d]=size(imageDilate);
+image=double(image);
+imageDilate=double(imageDilate);
+v=image;
+ for i=1:l
+    for j=1:c
+            v(i,j)=imageDilate(i,j)-image(i,j);       
+    end
+ end
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_ContourMorphologique_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+%s=strel('square',3);
+s= strel('disk',5);
+imageDilate=imdilate(image,s);
+imageErode=imerode(image,s);
+[l,c,d]=size(imageDilate);
+imageErode=double(imageErode);
+imageDilate=double(imageDilate);
+v=imageDilate;
+ for i=1:l
+    for j=1:c
+            v(i,j)=imageDilate(i,j)-imageErode(i,j);       
+    end
+ end
+imageS=uint8(v);
+
+axes(handles.imgS);
+imshow(imageS);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function menu_PointsDinteret_Callback(hObject, eventdata, handles)
+
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_SUSAN_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   im =imageO;
+else
+   im=imageS;
+end
+% =======================conversion de l'image=============================
+d = length(size(im));
+    if d==3
+        image=double(rgb2gray(im));
+    elseif d==2
+        image=double(im);
+    end
+[n,m]=size(image);
+% =============================données=====================================
+rayon=1;
+alpha=80;
+r=5;
+alpha=alpha/100;
+% ========================génerateur de mask=============================
+mask=zeros(2*rayon+1);
+b=ones(rayon+1);
+for i=1:rayon+1
+    for j=1:rayon+1
+        if (rayon==1)
+            if(j>i)
+            b(i,j)=0;
+            end
+        else
+            if(j>i+1)
+            b(i,j)=0;
+            end
+        end
+    end
+end
+mask(1:rayon+1,rayon+1:2*rayon+1)=b;
+mask(1:rayon+1,1:rayon+1)=rot90(b);
+mask0=mask;
+mask0=flipdim(mask0,1);
+mask=mask0+mask;
+mask(rayon+1,:)=mask(rayon+1,:)-1;
+% ==========================réponse maximale============================
+max_reponse=sum(sum(mask));
+% =====================balayage de toute l'image===========================
+f=zeros(n,m);
+for i=(rayon+1):n-rayon
+    for j=(rayon+1):m-rayon
+        image_courant=image(i-rayon:i+rayon,j-rayon:j+rayon);
+        image_courant_mask=image_courant.*mask;
+        inteniste_cental= image_courant_mask(rayon+1,rayon+1);
+        s=exp(-1*(((image_courant_mask-inteniste_cental)/max_reponse).^6));
+        somme=sum(sum(s));
+% si le centre du mask est un 0 il faut soustraire les zeros des filtres
+       if (inteniste_cental==0)
+        somme=somme-length((find(mask==0)));
+       end
+        f(i,j)=somme;
+    end
+end
+
+% =============selection et seuillage des points d'interét=================
+ff=f(rayon+1:n-(rayon+1),rayon+1:m-(rayon+1));
+minf=min(min(ff));
+maxf=max(max(f));
+fff=f;
+d=2*r+1;
+temp1=round(n/d);
+   if (temp1-n/d)<0.5 &(temp1-n/d)>0
+    temp1=temp1-1;
+   end
+    temp2=round(m/d);
+   if (temp2-m/d)<0.5 &(temp2-m/d)>0
+    temp2=temp2-1;
+   end
+    fff(n:temp1*d+d,m:temp2*d+d)=0;
+
+for i=(r+1):d:temp1*d+d
+   for j=(r+1):d:temp2*d+d
+        window=fff(i-r:i+r,j-r:j+r);
+        window0=window;
+        [xx,yy]=find(window0==0);
+        for k=1:length(xx)
+            window0(xx(k),yy(k))=max(max(window0));
+        end
+        minwindow=min(min(window0));
+        [y,x]=find(minwindow~=window & window<=minf+alpha*(maxf-minf) & window>0);
+        [u,v]=find(minwindow==window);
+    if length(u)>1
+        for l=2:length(u)
+            fff(i-r-1+u(l),j-r-1+v(l))=0 ;
+        end
+    end
+   if length(x)~=0
+    for l=1:length(y)
+        fff(i-r-1+y(l),j-r-1+x(l))=0 ;
+    end
+   end
+   end
+end
+seuil=minf+alpha*(maxf-minf);
+[u,v]=find(minf<=fff & fff<=seuil );
+
+% ==============affichage des resultats====================================
+imageS=im;
+axes(handles.imgS);
+imshow(im);
+hold on;
+plot(v,u,'.r','MarkerSize',10);
+hold off;
+message = sprintf(' le nombre des points d''intérêts: %d      ',length(v));
+msgbox(message);
+
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_HARRIS_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+img=image;
+[m,n,d]=size(img);
+if(d==3)
+    img=rgb2gray(img);
+end
+%==========================================================================
+lambda=0.04;
+sigma=1; seuil=200; r=6; w=5*sigma;
+imd=double(img);
+dx=[-1 0 1
+    -2 0 2
+    -1 0 1]; % derivée horizontale : filtre de Sobel
+dy=dx'; % derivée verticale : filtre de Sobel
+g = fspecial('gaussian',max(1,fix(w)), sigma);
+Ix=conv2(imd,dx,'same');
+Iy=conv2(imd,dy,'same');
+Ix2=conv2(Ix.^2, g, 'same');
+Iy2=conv2(Iy.^2, g, 'same');
+Ixy=conv2(Ix.*Iy, g,'same');
+detM=Ix2.*Iy2-Ixy.^2;
+trM=Ix2+Iy2;
+R=detM-lambda*trM.^2;
+%==========================================================================
+R1=(1000/(1+max(max(R))))*R;
+%==========================================================================          
+[u,v]=find(R1<=seuil);
+nb=length(u);
+for k=1:nb
+    R1(u(k),v(k))=0;
+end
+R11=zeros(m+2*r,n+2*r);
+R11(r+1:m+r,r+1:n+r)=R1;
+[m1,n1]=size(R11);
+for i=r+1:m1-r
+    for j=r+1:n1-r
+        fenetre=R11(i-r:i+r,j-r:j+r);
+        ma=max(max(fenetre));
+        if fenetre(r+1,r+1)<ma
+            R11(i,j)=0;
+        end
+    end
+end
+R11=R11(r+1:m+r,r+1:n+r);
+[x,y]=find(R11);
+imageS=img;
+axes(handles.imgS);
+imshow(img);
+hold on;
+plot(y,x,'.r','MarkerSize',10);
+hold off;
+message = sprintf(' le nombre des points d''intérêts: %d      ',length(x));
+msgbox(message);
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+function sm_HARRISME_Callback(hObject, eventdata, handles)
+global imageS;
+global imageO;
+global check;
+if check==0
+   image =imageO;
+else
+   image =imageS;
+end
+img=image;
+[m,n,d]=size(img);
+if(d==3)
+    img=rgb2gray(img);
+end
+%==========================================================================
+k=0.04; sigma=1; seuil=100; r=6;
+imd=double(img);
+dxa=[-sqrt(2)/4 0 sqrt(2)/4 ; -1 0 1 ; -sqrt(2)/4 0 sqrt(2)/4];
+dya=dxa'; % derivée verticale
+g=fspecial('gaussian',max(1,fix(5*sigma)),sigma); % gaussien
+Ixa=conv2(imd,dxa,'same');
+Iya=conv2(imd,dya,'same');
+Ixa2 = conv2(Ixa.^2, g, 'same');
+Iya2 = conv2(Iya.^2, g, 'same');
+Ixya = conv2(Ixa.*Iya, g,'same');
+R=Ixa2.*Iya2-Ixya.^2-k*(Ixa2+Iya2).^2;
+R1=(1000/(max(max(R))))*R; %normalisation
+[u,v]=find(R1<=seuil);
+nb=length(u);
+for k=1:nb
+    R1(u(k),v(k))=0;
+end
+R11=zeros(m+2*r,n+2*r);
+R11(r+1:m+r,r+1:n+r)=R1;
+[m1,n1]=size(R11);
+for i=r+1:m1-r
+    for j=r+1:n1-r
+        fenetre=R11(i-r:i+r,j-r:j+r);
+        ma=max(max(fenetre));
+        if fenetre(r+1,r+1)<ma
+        R11(i,j)=0;
+        end
+    end
+end
+R11=R11(r+1:m+r,r+1:n+r);
+[x,y]=find(R11);
+imageS=img;
+axes(handles.imgS);
+imshow(img);
+hold on;
+plot(y,x,'.r','MarkerSize',10);
+hold off;
+message = sprintf(' le nombre des points d''intérêts: %d      ',length(x));
+msgbox(message);
+
+##### SOURCE END #####
+--></body></html>
