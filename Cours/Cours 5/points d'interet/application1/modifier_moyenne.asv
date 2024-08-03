@@ -1,8 +1,0 @@
-function modifier_moyenne
-global baravancM
-    m=get(baravancM,'Value');
-    moy=num2str(m);
-    set(edittext1,'String',moy);
-    v=get(baravancV,'Value');
-    var=num2str(v);
-    set(edittext2,'String',var);
